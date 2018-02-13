@@ -9,6 +9,8 @@ export default class Login extends React.Component {
         this.state = {
             tag : ''
         }
+        this.onSignIn = this.onSignIn.bind(this)
+        this.signOut = this.signOut.bind(this)
     }
     onSignIn(userProfile, accessToken) {
         console.log(userProfile.email)
@@ -32,25 +34,42 @@ export default class Login extends React.Component {
     }
 
     render() {
-        return (
-            <div>
+        if(this.state.tag === '')
+        {
+            return (
                 <div>
-                <GoogleSignIn clientId="260101237603-n4a0hkmaccsdhb9i67r38g2f6ebc87gn.apps.googleusercontent.com"
-                            ref={g => this.googleAuth = g}
-                            onSuccess={this.onSignIn.bind(this)}
-                />
-                </div>
-                <div>
-                    {this.state.tag}
-                </div>
-                <div>
-                    <GoogleLogout
-                        buttonText="Logout"
-                        onLogoutSuccess={this.signOut.bind(this)}
+                    <div>
+                    <GoogleSignIn clientId="260101237603-n4a0hkmaccsdhb9i67r38g2f6ebc87gn.apps.googleusercontent.com"
+                                ref={g => this.googleAuth = g}
+                                onSuccess={this.onSignIn}
                     />
+                    </div>
+                    <div>
+                        <GoogleLogout
+                            buttonText="Logout"
+                            onLogoutSuccess={this.signOut}
+                        />
+                    </div>
                 </div>
-            </div>
-        )   
+            )  
+        }
+        else
+        {
+            return (
+                <div>
+                    <div>
+                        <span>Sign in as : {this.state.tag}</span>
+                    </div>
+                    <div>
+                        <GoogleLogout
+                            buttonText="Logout"
+                            onLogoutSuccess={this.signOut}
+                        />
+                    </div>
+                </div>
+            )
+        }
+           
     }
 
 }
