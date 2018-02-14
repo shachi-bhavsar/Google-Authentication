@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleSignIn from "react-google-signin";
 import {GoogleLogout} from 'react-google-oauth'
-    
+import App from './App'
 export default class Login extends React.Component { 
 
     constructor(props){
@@ -59,6 +59,10 @@ export default class Login extends React.Component {
                 <div>
                     <div>
                         <span>Sign in as : {this.state.tag}</span>
+                        <hr/>
+                    </div>
+                    <div>
+                        <App/>
                     </div>
                     <div>
                         <GoogleLogout
